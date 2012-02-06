@@ -14,4 +14,3 @@
 //= require jquery_ujs
 //= require ember
 //= require ember/todos
-//= require_tree .

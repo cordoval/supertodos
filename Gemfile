@@ -5,8 +5,10 @@ gem 'rails', '3.2.1'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'inherited_resources'
+
 gem 'ember-rails'
+gem 'haml'
+gem 'inherited_resources'
 
 group :development do
   gem 'sqlite3'
