@@ -1,21 +1,23 @@
-{{view Todos.CreateTodoView id="new-todo" placeholder="What needs to be done?"}}
+{{view Todos.CreateTodoView id = "new-todo" placeholder = "What needs to be done?"}}
 
-{{#view Todos.StatsView id="stats"}}
-  {{#view Em.Button classBinding="isActive"
-    target="Todos.todosController"
-    action="clearCompletedTodos"}}
+{{#view Todos.StatsView id = "stats"}}
+  {{#view Ember.Button classBinding = "isActive"
+    target = "Todos.todosController"
+    action = "clearCompletedTodos"}}
     Clear Completed Todos
   {{/view}}
-  <span class="remaining">
+  <span class = "remaining">
     {{remainingString}} remaining
   </span>
 {{/view}}
 
-{{view Em.Checkbox class="mark-all-done"
-  title="Mark All as Done"
-  valueBinding="Todos.todosController.allAreDone"}}
+{{view Ember.Checkbox class="mark-all-done"
+  title = "Mark All as Done"
+  valueBinding = "Todos.todosController.allAreDone"}}
 
-{{#collection contentBinding="Todos.todosController" tagName="ul" itemClassBinding="content.isDone"}}
-  {{view Em.Checkbox titleBinding="content.title"
-      valueBinding="content.isDone"}}
+{{#collection tagName = "ul"
+              contentBinding = "Todos.todosController" 
+              itemClassBinding = "content.isDone"}}
+  {{view Ember.Checkbox titleBinding = "content.title"
+      valueBinding = "content.isDone"}}
 {{/collection}}
