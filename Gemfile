@@ -6,7 +6,7 @@ gem 'rails', '3.2.1'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'inherited_resources'
-gem 'ember-rails', path: '~/ember-rails'
+gem 'ember-rails'
 
 group :development do
   gem 'sqlite3'
