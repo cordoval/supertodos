@@ -1,2 +1,2 @@
 Todos.MainView = Ember.View.extend
-  templateName: 'main_view'
+  templateName: 'ember/templates/main_view'
