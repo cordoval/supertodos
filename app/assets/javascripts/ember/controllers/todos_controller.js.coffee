@@ -1,14 +1,19 @@
 Todos.todosController = Ember.ArrayController.create
-  content: Todos.Todo.all()
+  content: []
 
   createTodo: (title) ->
     todo = Todos.Todo.create({ title: title })
-    this.pushObject(todo)
     todo.save()
+    this.pushObject(todo)
+    todo
+
+  removeTodo: (todo) ->
+    todo.delete()
+    this.removeObject(todo)
 
   clearCompletedTodos: ->
     this.filterProperty('isDone', true)
-        .forEach(this.removeObject, this)
+        .forEach(this.removeTodo, this)
 
   remaining: (->
     this.filterProperty('isDone', false).get('length')

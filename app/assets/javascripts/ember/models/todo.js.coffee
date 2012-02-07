@@ -15,14 +15,15 @@ Todos.Todo = Ember.Object.extend
   ).property('id')
 
   save: ->
-    self = this
+    self  = this
     isNew = self.get('isNew')
+    id    = self.get('id')
 
     if isNew
       url = '/todos.json'
       method = 'POST'
     else
-      url = "/todos/#{self.get('id')}.json"
+      url = "/todos/#{id}.json"
       method = 'PUT'
 
     $.ajax url,
@@ -30,9 +31,10 @@ Todos.Todo = Ember.Object.extend
       data: { todo: self.get('attributes'), _method: method }
       dataType: 'text'
       success: (data, response) ->
-        data = $.trim(data)
-        data = JSON.parse(data) if data
-        self.set('id', data['id'])
+        if isNew
+          data = $.trim(data)
+          data = JSON.parse(data) if data
+          self.set('id', data['id'])
       error: (response, status, error) ->
         console.error status, error, response.responseText
     self
@@ -40,7 +42,15 @@ Todos.Todo = Ember.Object.extend
   autosave: (->
     this.save()
   ).observes('isDone')
-  
+
+  delete: ->
+    id = this.get('id')
+    $.ajax "/todos/#{id}.json",
+      type: 'POST'
+      data:
+        _method: 'DELETE'
+      dataType: 'text'
+    this
 
 Todos.Todo.all = ->
   todos = []
@@ -51,6 +61,7 @@ Todos.Todo.all = ->
           todo = Todos.Todo.create
             id: item.id
             title: item.title
+            isDone: item.is_done
           todos.pushObject(todo)
       error: (response, status, error) ->
         console.error status, error, response.responseText

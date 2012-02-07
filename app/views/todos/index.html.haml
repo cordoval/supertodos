@@ -3,3 +3,10 @@
 %script{type: "text/x-handlebars"}
   :plain
     {{view Todos.MainView}}
+
+%script{type: "text/javascript"}
+  :plain
+    $(function () {
+      Todos.todosController.set('content', Todos.Todo.all());
+    });
+  
