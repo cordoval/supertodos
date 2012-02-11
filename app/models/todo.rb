@@ -1,6 +1,7 @@
 class Todo < ActiveRecord::Base
   after_create  :send_create
   after_destroy :send_destroy
+  after_update  :send_update
 
   private
 
@@ -10,6 +11,10 @@ class Todo < ActiveRecord::Base
 
   def send_destroy
     send_to_pusher :destroy
+  end
+
+  def send_update
+    send_to_pusher :update
   end
 
   def send_to_pusher(method)

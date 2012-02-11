@@ -8,19 +8,21 @@
   $(function () {
     Todos.todosController.set('content', Todos.Todo.all());
   });
+</script>
 
+<script type="text/javascript">
   Pusher.log = function(message) {
     if (window.console && window.console.log) window.console.log(message);
   };
 
   // Flash fallback logging - don't include this in production
-  WEB_SOCKET_DEBUG = true;
+  // WEB_SOCKET_DEBUG = true;
 
   var pusher  = new Pusher('da9e7914580b6095a3e2');
   var channel = pusher.subscribe('supertodos');
 
   channel.bind('todos:create', function(data) {
-    todo = Todos.Todo.create({
+    var todo = Todos.Todo.create({
       id:     data.id,
       title:  data.title,
       isDone: data.is_done
@@ -34,6 +36,15 @@
 
     while (i--) if (todos[i].id === data.id) {
       Todos.todosController.removeObject(todos[i]);
+    }
+  });
+
+  channel.bind('todos:update', function(data) {
+    var todos = Todos.todosController.get('content'),
+        i = todos.length;
+
+    while (i--) if (todos[i].id === data.id) {
+      todos[i].set('isDone', data.is_done);
     }
   });
 </script>
