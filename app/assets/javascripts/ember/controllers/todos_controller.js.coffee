@@ -4,7 +4,6 @@ Todos.todosController = Ember.ArrayController.create
   createTodo: (title) ->
     todo = Todos.Todo.create({ title: title })
     todo.save()
-    this.pushObject(todo)
     todo
 
   removeTodo: (todo) ->

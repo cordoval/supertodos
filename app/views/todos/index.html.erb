@@ -1,0 +1,30 @@
+<h1>Todos</h1>
+
+<script type="text/x-handlebars">
+  {{view Todos.MainView}}
+</script>
+
+<script type="text/javascript">
+  $(function () {
+    Todos.todosController.set('content', Todos.Todo.all());
+  });
+
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) window.console.log(message);
+  };
+
+  // Flash fallback logging - don't include this in production
+  WEB_SOCKET_DEBUG = true;
+
+  var pusher  = new Pusher('da9e7914580b6095a3e2');
+  var channel = pusher.subscribe('supertodos');
+
+  channel.bind('todo:create', function(data) {
+    todo = Todos.Todo.create({
+      id:     data.id,
+      title:  data.title,
+      isDone: data.is_done
+    });
+    Todos.todosController.pushObject(todo);
+  });
+</script>

@@ -1,4 +1,5 @@
-{{view Todos.CreateTodoView id = "new-todo" placeholder = "What needs to be done?"}}
+{{view Todos.CreateTodoView id = "new-todo"
+  placeholder = "What needs to be done?"}}
 
 {{#view Todos.StatsView id = "stats"}}
   {{#view Ember.Button classBinding = "isActive"
@@ -16,7 +17,7 @@
   valueBinding = "Todos.todosController.allAreDone"}}
 
 {{#collection tagName = "ul"
-              contentBinding = "Todos.todosController" 
+              contentBinding = "Todos.todosController"
               itemClassBinding = "content.isDone"}}
   {{view Ember.Checkbox titleBinding = "content.title"
       valueBinding = "content.isDone"}}
