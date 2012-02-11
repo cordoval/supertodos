@@ -19,12 +19,21 @@
   var pusher  = new Pusher('da9e7914580b6095a3e2');
   var channel = pusher.subscribe('supertodos');
 
-  channel.bind('todo:create', function(data) {
+  channel.bind('todos:create', function(data) {
     todo = Todos.Todo.create({
       id:     data.id,
       title:  data.title,
       isDone: data.is_done
     });
     Todos.todosController.pushObject(todo);
+  });
+
+  channel.bind('todos:destroy', function(data) {
+    var todos = Todos.todosController.get('content'),
+        i = todos.length;
+
+    while (i--) if (todos[i].id === data.id) {
+      Todos.todosController.removeObject(todos[i]);
+    }
   });
 </script>

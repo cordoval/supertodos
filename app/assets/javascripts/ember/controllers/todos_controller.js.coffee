@@ -8,7 +8,6 @@ Todos.todosController = Ember.ArrayController.create
 
   removeTodo: (todo) ->
     todo.delete()
-    this.removeObject(todo)
 
   clearCompletedTodos: ->
     this.filterProperty('isDone', true)
