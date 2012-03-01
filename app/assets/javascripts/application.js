@@ -13,4 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require ember
+//= require vendor/ember-data-latest
 //= require ember/todos

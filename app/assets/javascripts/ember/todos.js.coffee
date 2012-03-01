@@ -6,3 +6,6 @@
 #= require_tree ./templates
 
 window.Todos = Ember.Application.create()
+
+Todos.store = DS.Store.create
+  adapter: DS.RESTAdapter.create(bulkCommit: false)

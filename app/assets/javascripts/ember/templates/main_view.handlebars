@@ -18,7 +18,7 @@
 
 {{#collection tagName = "ul"
               contentBinding = "Todos.todosController"
-              itemClassBinding = "content.isDone"}}
+              itemClassBinding = "content.is_done"}}
   {{view Ember.Checkbox titleBinding = "content.title"
-      valueBinding = "content.isDone"}}
+      valueBinding = "content.is_done"}}
 {{/collection}}
